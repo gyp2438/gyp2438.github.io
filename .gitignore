@@ -29,5 +29,19 @@ local_settings.py
 staticfiles/
 media/
 # Ignore staticfiles versions if you have versioned directories
-staticfiles_main/
-static
+
+# Django cache and temporary files
+*.mo
+*.swp
+
+# Ignore VS Code, PyCharm, and other editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore deployment-related files
+*.env  # environment variables
+.env.*
+.DS_Store
+*.bak
