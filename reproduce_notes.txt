@@ -29,4 +29,6 @@ Set up a superuser and view admin dashboard
 Add view html templates 
     $ mkdir -p blog/templates/blog
     $ touch blog/templates/blog/<template_name>.html
-    
+
+Collect static htmls (takes some time)
+    $ python manage.py collectstatic
