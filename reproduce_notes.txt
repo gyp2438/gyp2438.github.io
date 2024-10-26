@@ -1,0 +1,18 @@
+NOTES: 
+    A single project can have multiple apps 
+
+Steps to reproduce:
+
+Set up conda 
+    $ conda create -n git_io
+    $ conda install -c conda-forge django
+
+Set up django repo
+    $ django-admin startproject github_io .
+    
+Set up apps 
+    $ python manage.py startapp <appname>
+
+Run it on a server - defaults to http://localhost:8000
+    $ python manage.py runserver
+
