@@ -41,7 +41,7 @@ def blog_tag(request, tag):
     return render(request, "blog/tag.html", context)
 
 
-def blog_detail(request, key):
+def blog_detail(request, pk):
     """
     Get a specifc blog entry by primary key (pk)
 
@@ -49,7 +49,7 @@ def blog_detail(request, key):
         request (_type_): _description_
         key (_type_): _description_
     """
-    post = Post.objects.get(pk=key)
+    post = Post.objects.get(pk=pk)
 
     form = CommentForm()
     if request.method == "POST":
