@@ -1,0 +1,49 @@
+<!--  blog/templates/blog/detail.html -->
+<!-- templates/base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>My Personal Blog</title>
+    
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+<body>
+<h1>My Personal Blog</h1>
+<a href="/">Home</a>
+<hr>
+
+    <h2>Test blog</h2>
+
+
+    <small>
+        Oct. 28, 2024 | Tag:
+        
+            <a href="/tag/test/">
+                test
+            </a>
+        
+    </small>
+    <p><p>testing</p></p>
+    <h3>Leave a comment:</h3>
+    <form method="post">
+        <input type="hidden" name="csrfmiddlewaretoken" value="utKLTeOtLop48Q4sAPLmr62IHX6NsZbBt8Th9a6nIkEGURbo8BuGZaUcKVZHqSff">
+        <div>
+            <input type="text" name="author" class="form-control" placeholder="Your Name" maxlength="60" required id="id_author">
+        </div>
+        <div>
+            <textarea name="body" cols="40" rows="10" class="form-control" placeholder="Leave a comment!" required id="id_body">
+</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <h3>Comments:</h3>
+    
+
+    
+
+</body>
+</html>
