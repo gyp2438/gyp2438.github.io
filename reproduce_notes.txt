@@ -34,4 +34,4 @@ Collect static htmls
     $ python manage.py collectstatic
 
 Make a static html
-    $ python manage.py distill-local --collectstatic
+    $ python manage.py distill-local --collectstatic docs
