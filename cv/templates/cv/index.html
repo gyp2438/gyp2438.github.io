@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block page_title %}
+    <h2>This is my CV</h2>
+{% endblock page_title %}
+{% block page_content %}
+    {% block educations %}
+        <h2>
+            <b>Education</b>
+        </h2>
+        {% for education in educations %}
+            <h4>
+                {{ education.title }}
+                {{ education.location.name }}
+            </h4>
+            {{ education.from_date }}
+            {{ education.to_date }}
+        {% endfor %}
+    {% endblock educations %}
+{% endblock page_content %}

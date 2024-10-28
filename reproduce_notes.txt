@@ -13,6 +13,12 @@ Set up django repo
 
 Set up apps 
     $ python manage.py startapp <appname>
+    
+    Create <appname>/templates/<appname>/<path>.html template files
+    Create models 
+    Create urls 
+    create views
+    
 
 Run it on a server - defaults to http://localhost:8000
     $ python manage.py runserver

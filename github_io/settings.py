@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
 
     "blog.apps.BlogConfig",  # add blog app
+    "cv.apps.CvConfig",  # add cv app
     "github_io",
 
     'django.contrib.admin',

@@ -5,6 +5,7 @@ from blog.forms import CommentForm
 
 
 # Create your views here.
+# TODO slugify urls
 
 
 def blog_index(request):

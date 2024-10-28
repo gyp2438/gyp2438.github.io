@@ -4,6 +4,8 @@ from .models import Post, Tag
 
 from . import views
 
+# TODO slugify paths
+
 
 def get_all_blog_pks():
     return ((post.pk,) for post in Post.objects.all())
