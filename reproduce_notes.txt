@@ -30,5 +30,8 @@ Add view html templates
     $ mkdir -p blog/templates/blog
     $ touch blog/templates/blog/<template_name>.html
 
-Collect static htmls (takes some time)
+Collect static htmls
     $ python manage.py collectstatic
+
+Make a static html
+    $ python manage.py distill-local --collectstatic
