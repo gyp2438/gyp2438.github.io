@@ -35,3 +35,6 @@ Collect static htmls
 
 Make a static html
     $ python manage.py distill-local --collectstatic docs
+
+Add some git hooks
+    $ pre-push and post-push
