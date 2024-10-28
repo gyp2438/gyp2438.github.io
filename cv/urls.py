@@ -14,3 +14,13 @@ from . import views
 urlpatterns = [
     path("cv/", views.cv_index, name="cv_index"),
 ]
+
+urlpatterns += [
+
+    distill_path(
+        'cv/',
+        views.cv_index,
+        name='cv_index',
+        distill_file='cv/index.html'  # Home page as index.html
+    ),
+]
