@@ -1,0 +1,43 @@
+#!/bin/bash
+
+LOGFILE="logfile.log"
+VENV_PYTHON="/home/johnlee/Software/miniconda3/envs/git_io/bin/python"
+echo "Running pre-push hook at $(date)" >> $LOGFILE
+
+# Only run for the main branch
+while read local_ref local_sha remote_ref remote_sha
+do
+    if [[ "$remote_ref" == "refs/heads/main" ]]; then
+        # Update distilled files
+        echo "Updating distilled files..." >> $LOGFILE
+        # Automatically specify yes
+        echo "yes" | $VENV_PYTHON  /home/johnlee/git/johnlee4.github.io/manage.py distill-local --collectstatic docs >> $LOGFILE 2>&1
+
+        # Check if the distill command was successful
+        if [[ $? -ne 0 ]]; then
+            echo "Failed to update distilled files. Aborting push." >> $LOGFILE
+            exit 1
+        fi
+
+        # Stage the updated files in docs
+        git add docs/*
+
+        # Check if there are changes to commit
+        if ! git diff-index --quiet HEAD --; then
+            # Commit the changes
+            git commit -m "Update distilled files" >> $LOGFILE 2>&1
+            echo "Committed updated distilled files in docs." >> $LOGFILE
+            ./version.sh
+
+
+        else
+            echo "No changes in docs to commit." >> $LOGFILE
+        fi
+
+
+    elif [[ "$remote_ref" == "refs/heads/develop" ]]; then
+                ./version.sh
+    fi
+
+
+done
