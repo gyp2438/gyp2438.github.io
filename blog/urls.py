@@ -27,7 +27,7 @@ urlpatterns += [
         'blog/',
         views.blog_index,
         name='blog_index',
-        distill_file='index.html'  # Home page as index.html
+        distill_file='blog/index.html'  # Home page as index.html
     ),
 
     # Detail page URL for blog posts, matches "post/<int:pk>/"

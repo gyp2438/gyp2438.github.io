@@ -7,7 +7,7 @@ and some templates from  https://www.w3schools.com/w3css/w3css_templates.asp
 To use: 
 * Fork Repo
 * Create conda environment
-    * conda create --name git_io --file=environment.yml
+    * conda env create --name git_io --file=environment.yml
 * Migrate changes to get sql data
     * python manage.py migrate 
     * python manage.py makemigrations
@@ -16,6 +16,9 @@ To use:
 * Run the server
     * python manage.py runserver
     * navigate to 127.0.0.1:8000
+* copy the githook and edit
+    * open githooks/pre-push and change relavant filepaths
+    * cp githooks/pre-push .git/hooks/
 * Edit database in admin
     * 127.0.0.1:8000/admin
 * Push changes and hope for the best
