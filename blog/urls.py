@@ -1,7 +1,6 @@
 from django.urls import path
 from django_distill import distill_path
 from .models import Post, Tag
-
 from . import views
 
 # TODO slugify paths
@@ -16,8 +15,8 @@ def get_all_tags():
 
 
 urlpatterns = [
-    path("", views.blog_index, name="blog_index"),
-    path("post/<int:pk>/", views.blog_detail, name="blog_detail"),
+    path("blog/", views.blog_index, name="blog_index"),
+    path("blog/<int:pk>/", views.blog_detail, name="blog_detail"),
     path("tag/<tag>/", views.blog_tag, name="blog_tag"),
 ]
 
@@ -25,7 +24,7 @@ urlpatterns = [
 urlpatterns += [
     # Home page URL
     distill_path(
-        '',
+        'blog/',
         views.blog_index,
         name='blog_index',
         distill_file='index.html'  # Home page as index.html

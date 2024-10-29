@@ -32,9 +32,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-
+    "home.apps.HomeConfig",  # add home app
     "blog.apps.BlogConfig",  # add blog app
     "cv.apps.CvConfig",  # add cv app
+
+
     "github_io",
 
     'django.contrib.admin',
