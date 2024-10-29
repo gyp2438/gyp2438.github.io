@@ -1,3 +1,4 @@
+<!--  blog/templates/blog/detail.html -->
 <!-- templates/base.html -->
 
 
@@ -71,23 +72,42 @@
 <!-- When extending, other page templates can go here when placed in the title/content sections. -->
 <hr>
 
-    <h5 class="w3-center w3-padding-64">
-        <span class="w3-tag w3-wide">Some sub title?</span>
-    </h5>
+    <h2>This is a test blog</h2>
 
 
-    <div class="w3-container" id="about">
-        <div class="w3-content" style="max-width:700px">
-            <p>
-                <img src="https://lh6.googleusercontent.com/DRgCYkDrYqu-M1TX-N5FL8enBWZx7Sr8EBSoY56VrKXibDgjtkctJ5aVummdhuuQU-vH2E4-q1bdpve2oerkp7lXBtwWKcVYa9Dtcd2sCv5jl5SL0G4eEeSBqm2wv2DRKA=w1280"
-                     alt="This is my beautiful wife!" />
-                <img src="https://math.dartmouth.edu/photos/for-people-pages/park_f007f75.jpg"
-                     alt="This is my beautiful wife!" />
-                <br>
-                This is my beautiful wife!
-            </p>
+    <small>
+        Oct. 28, 2024 | Tag:
+        
+            <a href="/tag/some%20tag/">
+                some tag
+            </a>
+        
+    </small>
+    <p><p>Something cool!</p></p>
+    <h3>Leave a comment:</h3>
+    <form method="post">
+        <input type="hidden" name="csrfmiddlewaretoken" value="KaaaR8cE0ccY7uL60doxo9PR2Jtta7gIoBbqfLlXLeFhc31F5slKC0KsQqUBiOnD">
+        <div>
+            <input type="text" name="author" class="form-control" placeholder="Your Name" maxlength="60" required id="id_author">
         </div>
-    </div>
+        <div>
+            <textarea name="body" cols="40" rows="10" class="form-control" placeholder="Leave a comment!" required id="id_body">
+</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <h3>Comments:</h3>
+    
+        <p>
+            On Oct. 28, 2024 <b>john</b> wrote:
+        </p>
+        <p>
+            <p>my wife is beautiful!</p>
+        </p>
+    
+
+    
 
 </body>
 
