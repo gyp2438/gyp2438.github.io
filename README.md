@@ -7,7 +7,7 @@ and some templates from  https://www.w3schools.com/w3css/w3css_templates.asp
 To use: 
 * Fork Repo
 * Create conda environment
-    * conda create --name git_io --file=environment.yml
+    * conda envcreate --name git_io --file=environment.yml
 * Migrate changes to get sql data
     * python manage.py migrate 
     * python manage.py makemigrations
