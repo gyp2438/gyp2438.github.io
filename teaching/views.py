@@ -1,12 +1,27 @@
-from django.shortcuts import render
-import time
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
+
 from github_io.utils import get_sort
 from django.db.models import OuterRef, Subquery
 from cv.models import Employment
 from home.models import Location
-from .models import Course
+from .models import Course, Homework
 
 # Create your views here.
+
+
+def download_pdf(request, homework_id):
+    # Get the homework instance using its ID
+    homework = get_sort(Homework, 'due_date', descending=False)
+
+    # Open the PDF file and read its content
+    with open(homework.pdf.path, 'rb') as pdf_file:
+        response = HttpResponse(
+            pdf_file.read(), content_type='application/pdf')
+        # Set the Content-Disposition header to attachment to prompt a download
+        response['Content-Disposition'] = f'attachment; filename="{
+            homework.pdf.name.split("/")[-1]}"'
+        return response
 
 
 def teaching_index(request):
@@ -43,9 +58,11 @@ def course_index(request, pk):
     """
 
     course = Course.objects.get(pk=pk)
+    homeworks = course.homework.all()
 
     context = {
         "course": course,
+        'homeworks': homeworks
     }
 
     # populate course descriptions and stuff

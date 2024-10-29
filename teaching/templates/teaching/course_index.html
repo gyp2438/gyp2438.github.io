@@ -15,4 +15,20 @@
     <div style="margin-left: 20px;">{{ course.description }}</div>
     <b>Reading</b>
     <div style="margin-left: 20px;">{{ course.reading }}</div>
+    <br>
+    <hr>
+    <b>Homework</b>
+    <div style="margin-left: 20px;">
+        <ul>
+            {% for homework in homeworks %}
+                <li>
+                    <strong>{{ homework.title }}</strong>
+                    <a href="{% url 'download_pdf' homework.id %}">{{ homework.name }}</a> <!-- Link to download the PDF -->
+                    Due {{ homework.due_date }}
+                </li>
+            {% empty %}
+                <li>No homework assignments yet! Check back soon.</li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock page_content %}
