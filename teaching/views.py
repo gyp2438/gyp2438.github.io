@@ -12,7 +12,7 @@ from .models import Course, Homework
 
 def download_pdf(request, homework_id):
     # Get the homework instance using its ID
-    homework = get_sort(Homework, 'due_date', descending=False)
+    homework = get_object_or_404(Homework)
 
     # Open the PDF file and read its content
     with open(homework.pdf.path, 'rb') as pdf_file:
@@ -58,7 +58,7 @@ def course_index(request, pk):
     """
 
     course = Course.objects.get(pk=pk)
-    homeworks = course.homework.all()
+    homeworks = course.homework.all().order_by('due_date')
 
     context = {
         "course": course,
