@@ -1,7 +1,4 @@
-<!-- blog/templates/blog/category.html -->
-
-<!-- blog/templates/blog/index.html -->
-<!-- Displays the title and a snippet of the  -->
+<!--  blog/templates/blog/detail.html -->
 <!-- templates/base.html -->
 
 
@@ -75,22 +72,34 @@
 <!-- When extending, other page templates can go here when placed in the title/content sections. -->
 <hr>
 
-<h2></h2>
+    <h2>my jagiya</h2>
 
 
+    <small>
+        Oct. 29, 2024 | Tag:
+        
+            <a href="/tag/jagiya/">
+                jagiya
+            </a>
+        
+    </small>
+    <p><p>my jagiya is very cute</p></p>
+    <h3>Leave a comment:</h3>
+    <form method="post">
+        <input type="hidden" name="csrfmiddlewaretoken" value="XQaPJsWpQtmRw855IJSGHFux7e2Q5v6TUmhgff79LQ8BtS0v2zCkvaweRgdetTTN">
+        <div>
+            <input type="text" name="author" class="form-control" placeholder="Your Name" maxlength="60" required id="id_author">
+        </div>
+        <div>
+            <textarea name="body" cols="40" rows="10" class="form-control" placeholder="Leave a comment!" required id="id_body">
+</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <h3>Comments:</h3>
     
-        
-            <h3>
-                <a href="/post/1/">This is a test blog</a>
-            </h3>
-            <small>
-                Oct. 28, 2024 | Tags:
-                
-                    <a href="/tag/some%20tag/">some tag</a>
-                
-            </small>
-            <p>Something cool!...</p>
-        
+
     
 
 </body>
