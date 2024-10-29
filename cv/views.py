@@ -1,26 +1,9 @@
+from django.utils import timezone
 from django.shortcuts import render
-from django.db.models import Case, When, Value, IntegerField
 
 from cv.models import Education, Publication, Employment, Talk
-
+from github_io.utils import get_sort, get_last_update
 # Create your views here.
-from django.db.models import Case, When, Value, IntegerField
-
-
-def get_sort(model, date_field_name, descending=True):
-    desc = ''
-    if descending:
-        desc = '-'
-
-    return model.objects.annotate(
-        is_in_progress=Case(
-            # Check if the date field is None
-            When(**{date_field_name: None}, then=Value(1)),
-            default=Value(0),                                 # Default case
-            output_field=IntegerField(),
-        )
-        # Sort by in-progress first, then by date
-    ).order_by('-is_in_progress', desc + date_field_name)
 
 
 def cv_index(request):
@@ -41,6 +24,7 @@ def cv_index(request):
         "employments": employments,
         "publications": publications,
         'talks': talks,
+        'last_update': get_last_update()
     }
 
     # TODO add other sections

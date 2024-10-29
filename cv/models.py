@@ -1,46 +1,24 @@
 from django.db import models
 from django.utils.safestring import mark_safe
+from home.models import Person, Location
+from teaching.models import Course
+
 import markdown
+
 # Create your models here.
 
-# TODO move person and location to a base model?
-
-
-class Person(models.Model):
-    """used to store co-authors on papers/projects
-
-    Args:
-        models (_type_): _description_
-
-    Returns:
-        _type_: _description_
-    """
-    name = models.CharField(max_length=60)
-    affiliation = models.ForeignKey(
-        "Location", on_delete=models.PROTECT, related_name="person")
-
-    class Meta:
-        verbose_name_plural = "People"
-
-    def __str__(self):
-        return self.name
-
-
-class Location(models.Model):
-    name = models.CharField(max_length=60)
-
-    def __str__(self):
-        return self.name
+# TODO add a last updated to each model and print the most recent update on the footer of the CV page
 
 
 class Education(models.Model):
     title = models.CharField(max_length=60)
     location = models.ForeignKey(
-        "Location", on_delete=models.PROTECT, related_name="education")
+        Location, on_delete=models.PROTECT, related_name="education")
 
     # location = models.CharField(max_length=60)
     from_date = models.DateField()
     to_date = models.DateField(null=True, blank=True)
+    last_updated = models.DateTimeField(auto_now=True)
 
     def formatted_end_date(self):
         return self.to_date.strftime("%b %Y") if self.to_date else "Present"
@@ -52,7 +30,7 @@ class Education(models.Model):
 class Employment(models.Model):
     role = models.CharField(max_length=60)
     location = models.ForeignKey(
-        "Location", on_delete=models.PROTECT, related_name="employment")
+        Location, on_delete=models.PROTECT, related_name="employment")
 
     from_date = models.DateField()
 
@@ -60,6 +38,7 @@ class Employment(models.Model):
 
     # markdown
     note = models.TextField(blank=True)
+    last_updated = models.DateTimeField(auto_now=True)
 
     def note_as_html(self):
         # Convert Markdown content to HTML
@@ -82,8 +61,9 @@ class Publication(models.Model):
     volume = models.CharField(max_length=120, blank=True)
     issue = models.CharField(max_length=120, blank=True)
     people = models.ManyToManyField(
-        "Person",  related_name="publications")
+        Person,  related_name="publications")
     doi = models.CharField(max_length=120, blank=True)
+    last_updated = models.DateTimeField(auto_now=True)
 
     def authors(self):
         author_list = self.people.all()  # Fetch all related authors
@@ -125,9 +105,13 @@ class Publication(models.Model):
 
 
 class Teaching(models.Model):
+    # this might not be used in favor of just listing courses
+
+    # TODO loops through all courses
     role = models.CharField(max_length=60)
     location = models.ForeignKey(
-        "Location", on_delete=models.PROTECT, related_name="teaching")
+        Location, on_delete=models.PROTECT, related_name="teaching")
+    last_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -136,11 +120,12 @@ class Teaching(models.Model):
 class Mentoring(models.Model):
     title = models.CharField(max_length=120)
     location = models.ForeignKey(
-        "Location", on_delete=models.PROTECT, related_name="mentoring")
+        Location, on_delete=models.PROTECT, related_name="mentoring")
 
     from_date = models.DateField()
 
     to_date = models.DateField(null=True, blank=True)
+    last_updated = models.DateTimeField(auto_now=True)
 
     def formatted_end_date(self):
         return self.to_date.strftime("%b %Y") if self.to_date else "Present"
@@ -152,6 +137,7 @@ class Mentoring(models.Model):
 class Talk(models.Model):
     # TODO needs multiple locations/dates
     title = models.CharField(max_length=120)
+    last_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
@@ -162,9 +148,10 @@ class TalkDetail(models.Model):
         Talk, on_delete=models.PROTECT, related_name='details')
 
     location = models.ForeignKey(
-        "Location", on_delete=models.PROTECT, related_name="details")
+        Location, on_delete=models.PROTECT, related_name="details")
     date = models.DateField()
     note = models.TextField(max_length=60, blank=True)
+    last_updated = models.DateTimeField(auto_now=True)
 
     def formatted_end_date(self):
         return self.date.strftime("%b %Y")
@@ -176,8 +163,9 @@ class TalkDetail(models.Model):
 class Service(models.Model):
     role = models.CharField(max_length=120)
     location = models.ForeignKey(
-        "Location", on_delete=models.PROTECT, related_name="service")
+        Location, on_delete=models.PROTECT, related_name="service")
     date = models.DateField()
+    last_updated = models.DateTimeField(auto_now=True)
 
     def formatted_end_date(self):
         return self.date.strftime("%b %Y")
@@ -189,8 +177,9 @@ class Service(models.Model):
 class Conference(models.Model):
     name = models.CharField(max_length=60)
     location = models.ForeignKey(
-        "Location", on_delete=models.PROTECT, related_name="conference")
+        Location, on_delete=models.PROTECT, related_name="conference")
     date = models.DateField()
+    last_updated = models.DateTimeField(auto_now=True)
 
     def formatted_end_date(self):
         return self.date.strftime("%b %Y")

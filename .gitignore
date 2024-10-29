@@ -45,3 +45,6 @@ media/
 .env.*
 .DS_Store
 *.bak
+
+# common binaries
+*.pdf

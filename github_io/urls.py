@@ -23,4 +23,5 @@ urlpatterns = [
     path("", include("blog.urls")),
     path("", include("cv.urls")),
     path("", include("home.urls")),
+    path("", include("teaching.urls")),
 ]
