@@ -5,80 +5,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
+    <!-- Links (sit on top) -->
+    <div class="w3-top">
+        <div class="w3-row w3-padding w3-black">
+            <div class="w3-col s2">
+                <a href="{% url "home_index" %}" class="w3-button w3-block w3-black">HOME</a>
+            </div>
+            
+
+            <div class="w3-col s2">
+                <a href="{% url "blog_index" %}" class="w3-button w3-block w3-black">RESEARCH</a>
+            </div>
+            
+            <div class="w3-col s2">
+                <a href="{% url "teaching_index" %}" class="w3-button w3-block w3-black">TEACHING</a>
+            </div>
+            
+            <div class="w3-col s2">
+                <a href="{% url "cv_index" %}" class="w3-button w3-block w3-black">CV</a>
+            </div>
+
+            {% comment %} <div class="w3-col s2">
+                <a href="{% url "blog_index" %}" class="w3-button w3-block w3-black">BLOG</a>
+            </div> {% endcomment %}
+
+            <div class="w3-col s2">
+                <a href="{% url "home_index" %}" class="w3-button w3-block w3-black">MISC</a>
+            </div>
+        
+        </div>
+    </div>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>My Personal Blog</title>
+
+    <title>GaYee Park</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
     <style>
     body, html {
       height: 100%;
       font-family: "Inconsolata", sans-serif;
+      font-size: 20px; 
     }
     
     .bgimg {
       background-position: center;
       background-size: cover;
       background-image: url("https://lh4.googleusercontent.com/VnZGzEfX_rT4QYh7tFpIZX1BePMyeA0VOQhjVq6mEKibFdqm_NNzya_xHlVqPLNv4z2ft95sIAZPJSnaM5ezKEqtg7djM4ppzlTmYbg2Gtt9kHFSuuX6GqQtGWbx2Toe4g=w1280");
-      min-height: 25%;
-    }
-    
+      min-height: 25vh; 
+      padding-top: 100px; 
+      position: relative;
 
+    }
     </style>
+
+    
 </head>
 <body>
     
-<!-- Links (sit on top) -->
-<div class="w3-top">
-    <div class="w3-row w3-padding w3-black">
-        <div class="w3-col s2">
-            <a href="{% url "home_index" %}" class="w3-button w3-block w3-black">HOME</a>
-        </div>
-        
 
-        <div class="w3-col s2">
-            <a href="{% url "home_index" %}" class="w3-button w3-block w3-black">Research</a>
-        </div>
-        
-        <div class="w3-col s2">
-            <a href="{% url "home_index" %}" class="w3-button w3-block w3-black">Teaching</a>
-        </div>
-        
-        <div class="w3-col s2">
-            <a href="{% url "cv_index" %}" class="w3-button w3-block w3-black">CV</a>
-        </div>
 
-        <div class="w3-col s2">
-            <a href="{% url "blog_index" %}" class="w3-button w3-block w3-black">BLOG</a>
-        </div>
-
-        <div class="w3-col s2">
-            <a href="{% url "home_index" %}" class="w3-button w3-block w3-black">MISC</a>
+    <!-- Header with image -->
+    <header class="bgimg w3-display-container w3-grayscale-min" id="home">
+        <div class="w3-display-middle w3-center">
+            <span class="w3-text-black" style="font-size:90px">GaYee Park</span>
         </div>
     
-    </div>
-</div>
-
-<!-- Header with image -->
-<header class="bgimg w3-display-container w3-grayscale-min" id="home">
-    <div class="w3-display-middle w3-center">
-        {% comment %} <span class="w3-text-black" style="font-size:90px">John<br>Lee</span> {% endcomment %}
-    </div>
-
-</header>
-
+    </header>
 <!-- When extending, other page templates can go here when placed in the title/content sections. -->
 <hr>
-{% block page_title %}{% endblock page_title %}
+
+<h2 class="w3-center w3-padding-64">
+    <span class="w3-tag w3-wide">
+        {% block page_title %}
+        {% endblock page_title %}
+    </span>
+</h2>
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
 {% block page_content %}{% endblock page_content %}
+</div>
 </body>
 
 
 <!-- Footer -->
 <!-- TODO make this more fun? -->
 <footer class="w3-center w3-light-grey w3-padding-48 w3-large">
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+    {% block page_footer %}{% endblock page_footer %}
 </footer>
 
     
