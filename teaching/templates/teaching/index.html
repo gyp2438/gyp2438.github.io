@@ -3,21 +3,7 @@
     TEACHING
 {% endblock page_title %}
 {% block page_content %}
-    {% for location in locations %}
-        <h2>{{ location.name }}</h2>
-        <!-- Display the location title -->
-        <ul>
-            {% for course in location.course.all %}
-                <li>
-                    <b>{{ course.season }} {{ course.year }}:</b>
-                    <a href="{% url 'course_index' course.pk %}">{{ course.title }}</a>
-                </li>
-                <!-- Display each course title and date -->
-            {% empty %}
-                <!-- Handle case with no courses -->
-            {% endfor %}
-        </ul>
-    {% endfor %}
+    {% include "teaching/list.html" %}
 {% endblock page_content %}
 {% block page_footer %}
 {% endblock page_footer %}

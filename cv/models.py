@@ -54,7 +54,7 @@ class Employment(models.Model):
 
 class Publication(models.Model):
 
-    title = models.CharField(max_length=60)
+    title = models.CharField(max_length=180)
     journal = models.CharField(max_length=60, blank=True)
     pub_date = models.DateField(blank=True, null=True)
     article = models.CharField(max_length=120, blank=True)
@@ -64,8 +64,10 @@ class Publication(models.Model):
     doi = models.CharField(max_length=120, blank=True)
     last_updated = models.DateTimeField(auto_now=True)
 
-    tag = models.ForeignKey(Tag, on_delete=models.PROTECT,
-                            related_name='publications', blank=True)
+    tag = models.ManyToManyField(Tag,
+                                 related_name='publications', blank=True, default=None)
+
+    # TODO people need to be sorted properly
     people = models.ManyToManyField(
         Person,  related_name="publications", blank=True)
 
@@ -78,7 +80,12 @@ class Publication(models.Model):
             return author_list[0].name
 
         # Build the authors' string
-        auths = ', '.join(person.name for person in author_list[:-1])
+        auths = []
+        for i, person in enumerate(author_list):
+            if i < n_auths-1:
+                auths.append(person.name)
+
+        auths = ', '.join(auths)
         auths += f' and {author_list.last().name}'
         return auths
 

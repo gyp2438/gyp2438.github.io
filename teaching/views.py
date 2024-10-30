@@ -5,7 +5,7 @@ from github_io.utils import get_sort
 from django.db.models import OuterRef, Subquery
 from cv.models import Employment
 from home.models import Location
-from .models import Course, Homework
+from teaching.models import Course, Homework
 
 # Create your views here.
 
@@ -42,9 +42,9 @@ def teaching_index(request):
     locations = Location.objects.annotate(
         latest_experience_date=Subquery(
             latest_experience_date.values('from_date')[:1])
-    ).order_by('latest_experience_date').prefetch_related('course')
+    ).filter(course__isnull=False).order_by('latest_experience_date').prefetch_related('course')
 
-    context = {'locations': locations}
+    context = {'course_locations': locations}
 
     return render(request, "teaching/index.html", context)
 
