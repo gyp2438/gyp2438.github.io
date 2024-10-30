@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from blog.models import Post, Comment
 from django.http import HttpResponseRedirect
+
 from blog.forms import CommentForm
+from blog.models import Post, Comment
+from cv.models import Publication
 
 
 # Create your views here.
@@ -17,8 +19,10 @@ def blog_index(request):
     """
     # minus sign -> descending -> most recent first
     posts = Post.objects.all().order_by('-created_on')
+    # TODO include all publications
     context = {
         "posts": posts,
+        "title": "research"
     }
     return render(request, "blog/index.html", context)
 
@@ -33,13 +37,14 @@ def blog_tag(request, tag):
     """
     posts = Post.objects.filter(tags__name__contains=tag)
     posts = posts.order_by('-created_on')
+    # TODO include all publications with tag
 
     context = {
-        "category": tag,
         "posts": posts,
+        'title': tag,
     }
 
-    return render(request, "blog/tag.html", context)
+    return render(request, "blog/index.html", context)
 
 
 def blog_detail(request, pk):

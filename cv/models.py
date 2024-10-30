@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.safestring import mark_safe
-from home.models import Person, Location
+from home.models import Person, Location, Tag
 from teaching.models import Course
 
 import markdown
@@ -13,7 +13,7 @@ import markdown
 class Education(models.Model):
     title = models.CharField(max_length=60)
     location = models.ForeignKey(
-        Location, on_delete=models.PROTECT, related_name="education")
+        Location, on_delete=models.PROTECT, related_name="education", blank=True)
 
     # location = models.CharField(max_length=60)
     from_date = models.DateField()
@@ -30,7 +30,7 @@ class Education(models.Model):
 class Employment(models.Model):
     role = models.CharField(max_length=60)
     location = models.ForeignKey(
-        Location, on_delete=models.PROTECT, related_name="employment")
+        Location, on_delete=models.PROTECT, related_name="employment", blank=True)
 
     from_date = models.DateField()
 
@@ -60,10 +60,14 @@ class Publication(models.Model):
     article = models.CharField(max_length=120, blank=True)
     volume = models.CharField(max_length=120, blank=True)
     issue = models.CharField(max_length=120, blank=True)
-    people = models.ManyToManyField(
-        Person,  related_name="publications")
+
     doi = models.CharField(max_length=120, blank=True)
     last_updated = models.DateTimeField(auto_now=True)
+
+    tag = models.ForeignKey(Tag, on_delete=models.PROTECT,
+                            related_name='publications', blank=True)
+    people = models.ManyToManyField(
+        Person,  related_name="publications", blank=True)
 
     def authors(self):
         author_list = self.people.all()  # Fetch all related authors
@@ -110,7 +114,7 @@ class Teaching(models.Model):
     # TODO loops through all courses
     role = models.CharField(max_length=60)
     location = models.ForeignKey(
-        Location, on_delete=models.PROTECT, related_name="teaching")
+        Location, on_delete=models.PROTECT, related_name="teaching", blank=True)
     last_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -120,7 +124,7 @@ class Teaching(models.Model):
 class Mentoring(models.Model):
     title = models.CharField(max_length=120)
     location = models.ForeignKey(
-        Location, on_delete=models.PROTECT, related_name="mentoring")
+        Location, on_delete=models.PROTECT, related_name="mentoring", blank=True)
 
     from_date = models.DateField()
 
@@ -145,10 +149,10 @@ class Talk(models.Model):
 
 class TalkDetail(models.Model):
     talk = models.ForeignKey(
-        Talk, on_delete=models.PROTECT, related_name='details')
+        Talk, on_delete=models.PROTECT, related_name='details', blank=True)
 
     location = models.ForeignKey(
-        Location, on_delete=models.PROTECT, related_name="details")
+        Location, on_delete=models.PROTECT, related_name="details", blank=True)
     date = models.DateField()
     note = models.TextField(max_length=60, blank=True)
     last_updated = models.DateTimeField(auto_now=True)
@@ -163,7 +167,7 @@ class TalkDetail(models.Model):
 class Service(models.Model):
     role = models.CharField(max_length=120)
     location = models.ForeignKey(
-        Location, on_delete=models.PROTECT, related_name="service")
+        Location, on_delete=models.PROTECT, related_name="service", blank=True)
     date = models.DateField()
     last_updated = models.DateTimeField(auto_now=True)
 
@@ -177,7 +181,7 @@ class Service(models.Model):
 class Conference(models.Model):
     name = models.CharField(max_length=60)
     location = models.ForeignKey(
-        Location, on_delete=models.PROTECT, related_name="conference")
+        Location, on_delete=models.PROTECT, related_name="conference", blank=True)
     date = models.DateField()
     last_updated = models.DateTimeField(auto_now=True)
 
