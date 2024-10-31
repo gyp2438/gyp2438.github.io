@@ -9,11 +9,9 @@
         <div class="w3-col s3">
             <div class="w3-white w3-text-grey w3-card-4">
                 <div class="w3-display-container">
-                    <img src="https://math.dartmouth.edu/photos/for-people-pages/park_f007f75.jpg"
-                         alt="This is my beautiful wife!"
-                         style="width:100%" />
+                    <img src="{{ me.profile_picture.url }} " alt="" style="width:100%" />
                     <div class="w3-display-bottomleft w3-container w3-text-black">
-                        <h2>{{ me.name }}</h2>
+                        <h2 class="outlined-text">{{ me.person.name }}</h2>
                     </div>
                 </div>
                 <div class="w3-container">
@@ -38,9 +36,10 @@
     <div class="w3-col s8">
         <!-- Experience -->
         {% block employment %}
-            <h3>
+            <h2>
                 <b>Employment</b>
-            </h3>
+            </h2>
+            <hr>
             {% for employment in employments %}
                 <div>
                     <span style="float: left">
@@ -58,9 +57,10 @@
         {% endblock employment %}
         <!-- Education-->
         {% block educations %}
-            <h3>
+            <h2>
                 <b>Education</b>
-            </h3>
+            </h2>
+            <hr>
             {% for education in educations %}
                 <div style="margin-left: 20px;">
                     <span style="float: left">
@@ -76,9 +76,10 @@
         {% endblock educations %}
         <!-- publications -->
         {% block publication %}
-            <h3>
+            <h2>
                 <b>Publications</b>
-            </h3>
+            </h2>
+            <hr>
             {% for publication in publications %}
                 <div style="margin-left: 20px;">{{ publication.bib|safe }}</div>
                 <br>
@@ -86,45 +87,53 @@
         {% endblock publication %}
         <!-- teaching -->
         {% block teaching %}
-            <h3>
-                <b>Teaching</b>
-            </h3>
-            <div style="margin-left: 20px;">{% include "teaching/list.html" %}</div>
+            {% if course_locations %}
+                <h2>
+                    <b>Teaching</b>
+                </h2>
+                <hr>
+                <div style="margin-left: 20px;">{% include "teaching/list.html" %}</div>
+            {% endif %}
         {% endblock teaching %}
         <!-- mentoring -->
         {% block mentoring %}
-            <h3>
-                <b>Mentoring</b>
-            </h3>
-            {% for mentoring in mentorings %}<h5>{{ mentoring.title }}</h5>{% endfor %}
+            {% if mentorings %}
+                <h2>
+                    <b>Mentoring</b>
+                </h2>
+                <hr>
+                {% for mentoring in mentorings %}<h5>{{ mentoring.title }}</h5>{% endfor %}
+            {% endif %}
         {% endblock mentoring %}
         <!-- talks -->
         {% block talks %}
-            <h3>
-                <b>Talks</b>
-            </h3>
-            {% for talk in talks %}
-                <b>{{ talk.title }}</b>
-                <ul>
-                    {% for detail in talk.details.all %}
-                        <li>{{ detail.location }} - {{ detail.note }}, {{ detail.formatted_end_date }}</li>
-                    {% endfor %}
-                </ul>
-            {% endfor %}
+            {% if talks %}
+                <h2>
+                    <b>Talks</b>
+                </h2>
+                <hr>
+                <div style="margin-left: 20px;">{% include "cv/talk_list.html" %}</div>
+            {% endif %}
         {% endblock talks %}
         <!-- Conferences -->
         {% block conferences %}
-            <h3>
-                <b>Conference attendance</b>
-            </h3>
-            {% for conference in conferences %}<h5>{{ conference.name }}</h5>{% endfor %}
+            {% if conferences %}
+                <h2>
+                    <b>Conference attendance</b>
+                </h2>
+                <hr>
+                {% for conference in conferences %}<h5>{{ conference.name }}</h5>{% endfor %}
+            {% endif %}
         {% endblock conferences %}
         <!-- service -->
         {% block service %}
-            <h3>
-                <b>Service and other activities</b>
-            </h3>
-            {% for service in services %}<h5>{{ service.role }}</h5>{% endfor %}
+            {% if services %}
+                <h2>
+                    <b>Service and other activities</b>
+                </h2>
+                <hr>
+                {% for service in services %}<h5>{{ service.role }}</h5>{% endfor %}
+            {% endif %}
         {% endblock service %}
         <!-- End right Column -->
     </div>
@@ -133,6 +142,3 @@
     <!-- End page-->
 </div>
 {% endblock page_content %}
-{% block page_footer %}
-    Last updated: {{ last_update }}
-{% endblock page_footer %}

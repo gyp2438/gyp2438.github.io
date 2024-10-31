@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 
-from home.models import Person, Location
+from home.models import Person, Location, Me
 
 # Create your models here.
 
@@ -14,8 +14,10 @@ class Reading(models.Model):
 
 
 class Course(models.Model):
-    title = models.CharField(max_length=120)        # e.g. calculus 2
-    identifier = models.CharField(max_length=60, blank=True)    # e.g. math 132
+    # e.g. calculus 2
+    title = models.CharField(max_length=120, help_text='e.g. Calculus')
+    identifier = models.CharField(
+        max_length=60, blank=True, help_text='e.g. Math132')
     description = models.TextField(blank=True)
     date = models.DateField(null=True, blank=True, db_index=True)
 
@@ -26,12 +28,15 @@ class Course(models.Model):
         Location, on_delete=models.PROTECT, related_name='course')
 
     instructor = models.ForeignKey(
-        Person, on_delete=models.PROTECT, related_name='course')
+        Person, on_delete=models.PROTECT, related_name='course', default=1)
 
     reading = models.ForeignKey(
-        Reading, on_delete=models.PROTECT, related_name='course')
+        Reading, on_delete=models.PROTECT, related_name='course', blank=True, null=True, default=1)
+
+    create_page = models.BooleanField(default=True)
 
     slug = models.SlugField(max_length=200, unique=True, blank=True)
+    last_updated = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:  # Only set the slug if it's not already set
@@ -69,6 +74,7 @@ class Homework(models.Model):
     due_date = models.DateField()
     course = models.ManyToManyField(
         Course, related_name='homework')
+    last_updated = models.DateTimeField(auto_now=True)
 
     pdf = models.FileField(
         upload_to="homeworks/pdfs/", null=True, blank=True)

@@ -6,6 +6,8 @@ from django.shortcuts import get_object_or_404
 from blog.forms import CommentForm
 from blog.models import Post, Comment
 from cv.models import Publication
+from home.models import Banner
+from github_io.utils import get_sort, get_last_update
 
 
 # Create your views here.
@@ -19,12 +21,16 @@ def blog_index(request):
     Args:
         request (_type_): _description_
     """
+    banner = Banner.objects.filter(page='blog').first()
+
     # minus sign -> descending -> most recent first
     posts = Post.objects.all().order_by('-created_on')
     # TODO include all publications
     context = {
         "posts": posts,
-        "title": "research"
+        "title": "research",
+        'banner': banner,
+        'last_update': get_last_update()
     }
     return render(request, "blog/index.html", context)
 
@@ -39,6 +45,10 @@ def blog_detail(request, slug):
     """
     # post = Post.objects.get(slug=slug)
     post = get_object_or_404(Post, slug=slug)
+
+    banner = Banner.objects.filter(page=f'post-{slug}').first()
+    if not banner:
+        banner = Banner.objects.filter(page='blog').first()
 
     form = CommentForm()
     if request.method == "POST":
@@ -57,6 +67,9 @@ def blog_detail(request, slug):
         "post": post,
         "comments": comments,
         "form": form,
+        'banner': banner,
+
+        'last_update': get_last_update()
     }
 
     return render(request, "blog/detail.html", context)

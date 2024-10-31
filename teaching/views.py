@@ -1,11 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 
-from github_io.utils import get_sort
-from django.db.models import OuterRef, Subquery
+from django.db.models import OuterRef, Subquery, Prefetch
 from cv.models import Employment
-from home.models import Location
+from home.models import Location, Banner
 from teaching.models import Course, Homework
+from github_io.utils import get_sort, get_last_update
 
 # Create your views here.
 
@@ -39,12 +39,20 @@ def teaching_index(request):
     latest_experience_date = Employment.objects.filter(
         location=OuterRef('pk')).order_by('-from_date')
 
+    # Replace 'your_field_here' with the field you want to sort by
+    ordered_courses = Course.objects.order_by('-date')
+
     locations = Location.objects.annotate(
         latest_experience_date=Subquery(
             latest_experience_date.values('from_date')[:1])
-    ).filter(course__isnull=False).order_by('latest_experience_date').prefetch_related('course')
+    ).filter(course__isnull=False).order_by('latest_experience_date')
+    locations = locations.prefetch_related(
+        Prefetch('course', queryset=ordered_courses)).distinct()
+    banner = Banner.objects.filter(page='teaching').first()
 
-    context = {'course_locations': locations.distinct()}
+    context = {'course_locations': locations,
+               'banner': banner,
+               'last_update': get_last_update()}
 
     return render(request, "teaching/index.html", context)
 
@@ -59,10 +67,15 @@ def course_index(request, slug):
 
     course = Course.objects.get(slug=slug)
     homeworks = course.homework.all().order_by('due_date')
+    banner = Banner.objects.filter(page=f'course-{slug}').first()
+    if not banner:
+        banner = Banner.objects.filter(page='teaching').first()
 
     context = {
         "course": course,
-        'homeworks': homeworks
+        'homeworks': homeworks,
+        'banner': banner,
+        'last_update': get_last_update()
     }
 
     # populate course descriptions and stuff
