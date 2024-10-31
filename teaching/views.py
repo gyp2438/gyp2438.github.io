@@ -44,7 +44,7 @@ def teaching_index(request):
             latest_experience_date.values('from_date')[:1])
     ).filter(course__isnull=False).order_by('latest_experience_date').prefetch_related('course')
 
-    context = {'course_locations': locations}
+    context = {'course_locations': locations.distinct()}
 
     return render(request, "teaching/index.html", context)
 

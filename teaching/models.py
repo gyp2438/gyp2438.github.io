@@ -35,7 +35,8 @@ class Course(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:  # Only set the slug if it's not already set
-            slug = slugify(f'{self.identifier} {self.title}')
+            slug = slugify(
+                f'{self.season()[:2]}{self.year()[2:]} {self.identifier} {self.title}')
             # Ensure uniqueness
             original_slug = slug
             count = 1
@@ -46,7 +47,7 @@ class Course(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.identifier
+        return self.slug
 
     def year(self):
         return self.date.strftime("%Y")
