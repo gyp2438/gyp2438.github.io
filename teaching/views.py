@@ -49,7 +49,7 @@ def teaching_index(request):
     return render(request, "teaching/index.html", context)
 
 
-def course_index(request, pk):
+def course_index(request, slug):
     """
     main cv page
 
@@ -57,7 +57,7 @@ def course_index(request, pk):
         request (_type_): _description_
     """
 
-    course = Course.objects.get(pk=pk)
+    course = Course.objects.get(slug=slug)
     homeworks = course.homework.all().order_by('due_date')
 
     context = {

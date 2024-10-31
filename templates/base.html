@@ -53,7 +53,8 @@
     .bgimg {
       background-position: center;
       background-size: cover;
-      {% comment %} min-height: 75%; {% endcomment %}
+      max-width: 90% ;
+      margin: 0 auto; /* Center the div horizontally */
 
       height: 500px; /* Define a maximum height */
       overflow: hidden; /* Hide the overflow to crop the image */
@@ -69,9 +70,6 @@
     <!-- Header with image -->
     <div class="bgimg w3-display-container " id="home" style="background-image: url('{{banner.banner.url}}')" >
         
-            {% comment %} {% block banner %}
-            {% endblock banner %} {% endcomment %}
-
         {% comment %} <div class="w3-display-middle w3-center">
             <span class="w3-text-black" style="font-size:90px">{{me.person.name |upper}}</span>
         </div> {% endcomment %}

@@ -1,5 +1,8 @@
 from django.db import models
+from django.utils.text import slugify
+
 from home.models import Person, Location
+
 # Create your models here.
 
 
@@ -27,6 +30,20 @@ class Course(models.Model):
 
     reading = models.ForeignKey(
         Reading, on_delete=models.PROTECT, related_name='course')
+
+    slug = models.SlugField(max_length=200, unique=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:  # Only set the slug if it's not already set
+            slug = slugify(f'{self.identifier} {self.title}')
+            # Ensure uniqueness
+            original_slug = slug
+            count = 1
+            while Course.objects.filter(slug=slug).exists():
+                slug = f"{original_slug}-{count}"
+                count += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.identifier

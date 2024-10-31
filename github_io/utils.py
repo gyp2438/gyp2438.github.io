@@ -1,5 +1,8 @@
+from django.utils.safestring import mark_safe
 from django.db.models import Case, When, Value, IntegerField
 from django.apps import apps
+
+import markdown
 
 
 def get_sort(model, date_field_name, descending=True):
@@ -35,3 +38,9 @@ def get_last_update():
     # Get the most recent date (or None if no objects)
     last_updated_time = max(latest_times) if latest_times else None
     return last_updated_time
+
+
+def markdown_to_html(md_content):
+    # Convert Markdown content to HTML
+    html_content = markdown.markdown(md_content)
+    return mark_safe(html_content)

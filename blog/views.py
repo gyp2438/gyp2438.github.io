@@ -1,5 +1,7 @@
+from django.views.generic import DetailView
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 
 from blog.forms import CommentForm
 from blog.models import Post, Comment
@@ -27,27 +29,7 @@ def blog_index(request):
     return render(request, "blog/index.html", context)
 
 
-def blog_tag(request, tag):
-    """
-    Allow filter by tag
-
-    Args:
-        request (_type_): _description_
-        tag (_type_): _description_
-    """
-    posts = Post.objects.filter(tags__name__contains=tag)
-    posts = posts.order_by('-created_on')
-    # TODO include all publications with tag
-
-    context = {
-        "posts": posts,
-        'title': tag,
-    }
-
-    return render(request, "blog/index.html", context)
-
-
-def blog_detail(request, pk):
+def blog_detail(request, slug):
     """
     Get a specifc blog entry by primary key (pk)
 
@@ -55,7 +37,8 @@ def blog_detail(request, pk):
         request (_type_): _description_
         key (_type_): _description_
     """
-    post = Post.objects.get(pk=pk)
+    # post = Post.objects.get(slug=slug)
+    post = get_object_or_404(Post, slug=slug)
 
     form = CommentForm()
     if request.method == "POST":

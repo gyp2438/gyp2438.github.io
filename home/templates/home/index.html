@@ -8,14 +8,7 @@
 {% block page_content %}
     <div class="w3-container" id="about">
         <div class="w3-content" style="max-width:700px">
-            <p>
-                {{ me.about_me_html|safe }}
-                <br>
-                <img src="https://lh6.googleusercontent.com/DRgCYkDrYqu-M1TX-N5FL8enBWZx7Sr8EBSoY56VrKXibDgjtkctJ5aVummdhuuQU-vH2E4-q1bdpve2oerkp7lXBtwWKcVYa9Dtcd2sCv5jl5SL0G4eEeSBqm2wv2DRKA=w1280"
-                     alt="This is my beautiful wife!" />
-                <br>
-                This is my beautiful wife!
-            </p>
+            <p>{{ me.about_me_html|safe }}</p>
         </div>
     </div>
 {% endblock page_content %}

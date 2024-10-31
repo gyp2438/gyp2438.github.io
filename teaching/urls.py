@@ -7,7 +7,7 @@ from . import views
 
 urlpatterns = [
     path("teaching/", views.teaching_index, name="teaching_index"),
-    path("course/<int:pk>/", views.course_index, name="course_index"),
+    path("course/<slug:slug>/", views.course_index, name="course_index"),
     path('homework/<int:homework_id>/download/',
          views.download_pdf, name='download_pdf'),
 ]
