@@ -60,6 +60,12 @@ class Me(models.Model):
 class Banner(models.Model):
     # TODO  define page banners separately
     banner = models.ImageField(upload_to='photos/', blank=True, null=True)
+    page = models.SlugField(max_length=50, unique=True, blank=True,
+                            help_text="Enter the template name, e.g., 'home', 'about'")
+
+    def __str__(self):
+        return self.page
+
     # TODO link to specific page
     # course specific banners??
     # course_banner = models.ImageField(upload_to='photos/', blank=True, null=True)
