@@ -5,7 +5,11 @@
         {% for course in location.course.all %}
             <li>
                 <b>{{ course.season }} {{ course.year }}:</b>
-                <a href="{% url 'course_index' course.slug %}">{{ course.title }}</a>
+                {% if course.create_page %}
+                    <a href="{% url 'course_index' course.slug %}">{{ course.identifier }} - {{ course.title }}</a>
+                {% else %}
+                    {{ course.identifier }} - {{ course.title }}
+                {% endif %}
             </li>
             <!-- Display each course title and date -->
         {% empty %}

@@ -16,7 +16,7 @@
                     <a href="{% url 'tag_index' tag.slug %}">{{ tag.name }}</a>
                 {% endfor %}
             </small>
-            <p>{{ post.body_html |safe | slice:":400" }}</p>
+            <p>{{ post.body_html | safe | linebreaks | slice:":400" }}</p>
             <hr>
         {% endfor %}
     {% endblock posts %}

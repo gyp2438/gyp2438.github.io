@@ -54,6 +54,7 @@ class Me(models.Model):
     logo = models.ImageField(upload_to='photos/', blank=True, null=True)
     profile_picture = models.ImageField(
         upload_to='photos/', blank=True, null=True)
+    last_updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name_plural = "Me"
@@ -71,6 +72,7 @@ class Banner(models.Model):
     banner = models.ImageField(upload_to='photos/', blank=True, null=True)
     page = models.SlugField(max_length=50, unique=True, blank=True,
                             help_text="Enter the template name, e.g., 'home', 'about'")
+    last_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.page

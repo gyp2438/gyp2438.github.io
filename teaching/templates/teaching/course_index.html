@@ -8,13 +8,13 @@
     <br>
     <div style="margin-left: 20px;">{{ course.instructor.email }}</div>
     <b>Class Schedule</b>
-    <div style="margin-left: 20px;">{{ course.schedule }}</div>
+    <div style="margin-left: 20px;">{{ course.schedule|linebreaks }}</div>
     <b>Office Hours</b>
-    <div style="margin-left: 20px;">{{ course.office_hour }}</div>
+    <div style="margin-left: 20px;">{{ course.office_hour |linebreaks }}</div>
     <b>Course Description</b>
-    <div style="margin-left: 20px;">{{ course.description }}</div>
+    <div style="margin-left: 20px;">{{ course.description_html |safe }}</div>
     <b>Reading</b>
-    <div style="margin-left: 20px;">{{ course.reading }}</div>
+    <div style="margin-left: 20px;">{{ course.reading|linebreaks }}</div>
     <br>
     <hr>
     <b>Homework</b>

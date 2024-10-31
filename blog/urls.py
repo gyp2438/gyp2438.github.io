@@ -6,8 +6,8 @@ from . import views
 # TODO slugify paths
 
 
-def get_all_blog_pks():
-    return ((post.pk,) for post in Post.objects.all())
+def get_all_blog_slug():
+    return ((post.slug,) for post in Post.objects.all())
 
 
 urlpatterns = [
@@ -30,7 +30,7 @@ urlpatterns += [
         'post/<slug:slug>/',
         views.blog_detail,
         name='blog_detail',
-        distill_func=get_all_blog_pks,  # Supplies primary keys for each post
+        distill_func=get_all_blog_slug,  # Supplies primary keys for each post
         # Generates "post/<pk>/index.html"
         distill_file='post/{0}/index.html'
     ),

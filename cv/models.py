@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.safestring import mark_safe
-from home.models import Person, Location, Tag
+from home.models import Person, Location, Tag, Me
 from teaching.models import Course
 
 import markdown
@@ -69,7 +69,8 @@ class Publication(models.Model):
 
     # TODO people need to be sorted properly
     people = models.ManyToManyField(
-        Person,  related_name="publications", blank=True)
+        Person,  related_name="publications", blank=True, through='PublicationPerson')
+    me_instance = Me.objects.first()
 
     def authors(self):
         author_list = self.people.all()  # Fetch all related authors
@@ -83,7 +84,12 @@ class Publication(models.Model):
         auths = []
         for i, person in enumerate(author_list):
             if i < n_auths-1:
-                auths.append(person.name)
+                if person.name == self.me_instance.person.name:
+                    auths.append(
+                        f'<u>{person.name}</u>')
+
+                else:
+                    auths.append(person.name)
 
         auths = ', '.join(auths)
         auths += f' and {author_list.last().name}'
@@ -115,17 +121,16 @@ class Publication(models.Model):
         return self.title
 
 
-class Teaching(models.Model):
-    # this might not be used in favor of just listing courses
+class PublicationPerson(models.Model):
+    publication = models.ForeignKey(Publication, on_delete=models.CASCADE)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    order = models.PositiveIntegerField()  # Field to specify order
 
-    # TODO loops through all courses
-    role = models.CharField(max_length=60)
-    location = models.ForeignKey(
-        Location, on_delete=models.PROTECT, related_name="teaching", blank=True)
-    last_updated = models.DateTimeField(auto_now=True)
+    class Meta:
+        ordering = ['order']  # Ensure the default ordering is by 'order'
 
     def __str__(self):
-        return self.name
+        return f"{self.person.name} in {self.publication.title} (Order: {self.order})"
 
 
 class Mentoring(models.Model):

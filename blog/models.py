@@ -15,7 +15,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     body = models.TextField(help_text="Markdown Enabled.")
     created_on = models.DateTimeField(auto_now_add=True)
-    last_modified = models.DateTimeField(auto_now=True)
+    last_updated = models.DateTimeField(auto_now=True)
 
     slug = models.SlugField(max_length=200, unique=True, blank=True)
 
@@ -37,6 +37,7 @@ class Comment(models.Model):
     author = models.CharField(max_length=60)
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
+    last_updated = models.DateTimeField(auto_now=True)
 
     # if Post is deleted, also delete the comments
     # ForeignKeys are many to one - many comments for 1 post

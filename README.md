@@ -4,10 +4,13 @@ This follows a tutorial from:
 https://realpython.com/build-a-blog-from-scratch-django/
 and some templates from  https://www.w3schools.com/w3css/w3css_templates.asp
 
+Export conda environment:
+    * $ conda env export --no-builds  > environment.yml 
+
 To use: 
 * Fork Repo
 * Create conda environment. May need to remove some linux specific dependencies
-    * conda env create --name git_io --file=environment.yml
+    * conda env create --file=environment.yml
 * install git lfs for large file support in git. May need to do it manually if githooks exists
     * git lfs install 
 * Migrate changes to get sql data
