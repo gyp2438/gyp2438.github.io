@@ -1,5 +1,4 @@
-<!-- blog/templates/blog/index.html -->
-<!-- Displays the title and a snippet of the  -->
+<!--  blog/templates/blog/detail.html -->
 <!-- templates/base.html -->
 
 
@@ -83,7 +82,7 @@
 <h2 class="w3-center w3-padding-64">
     <span class="w3-tag w3-wide">
         
-    RESEARCH
+    <h2>Here&#x27;s a blog that I wrote!</h2>
 
     </span>
 </h2>
@@ -91,20 +90,21 @@
 
 <div class="w3-content w3-margin-top" style="max-width:1400px;">
 
-    
+    <small>
+        Oct. 31, 2024 | Tag:
         
-            <h3>
-                <a href="/post/heres-a-blog-that-i-wrote/">Here&#x27;s a blog that I wrote!</a>
-            </h3>
-            <small>
-                Oct. 31, 2024 | Tags:
-                
-                    <a href="/tag/nonlinear-waves/">Nonlinear Waves</a>
-                
-            </small>
-            <p><p><p>JK i didn't actually write one</p><br><ul><br><li>sa</li><br></ul></p></p>
-            <hr>
+            <a href="/tag/nonlinear-waves/">Nonlinear Waves</a>
         
+    </small>
+    <p><p><p>JK i didn't actually write one</p><br><ul><br><li>sa</li><br></ul></p></p>
+    <h3>Leave a comment:</h3>
+    <form method="post">
+        <input type="hidden" name="csrfmiddlewaretoken" value="fZx0jiXK2Sep11q4stFxsMBHtL1U3CHpT1U7MRu21Kk1Dzik5g8oo8m5zIcQqmVK">
+        <div><input type="text" name="author" class="form-control" placeholder="Your Name" maxlength="60" required id="id_author"></div>
+        <div><p><textarea name="body" cols="40" rows="10" class="form-control" placeholder="Leave a comment!" required id="id_body"><br></textarea></p></div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <h3>Comments:</h3>
     
 
 </div>
