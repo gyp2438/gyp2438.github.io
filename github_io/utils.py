@@ -42,5 +42,8 @@ def get_last_update():
 
 def markdown_to_html(md_content):
     # Convert Markdown content to HTML
-    html_content = markdown.markdown(md_content)
+    html_content = markdown.markdown(md_content,
+        # output_format='html5',  # Use HTML5 format
+        # extensions=[]                                         
+    )
     return mark_safe(html_content)

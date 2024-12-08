@@ -15,7 +15,7 @@
     <form method="post">
         {% csrf_token %}
         <div>{{ form.author }}</div>
-        <div>{{ form.body |linebreaks }}</div>
+        <div>{{ form.body  }}</div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <h3>Comments:</h3>

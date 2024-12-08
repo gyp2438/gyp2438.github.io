@@ -102,7 +102,7 @@
                     <b>Mentoring</b>
                 </h2>
                 <hr>
-                {% for mentoring in mentorings %}<h5>{{ mentoring.title }}</h5>{% endfor %}
+                {% for mentoring in mentorings %}<b>{{ mentoring.title }}</b>{% endfor %}
             {% endif %}
         {% endblock mentoring %}
         <!-- talks -->
@@ -121,8 +121,7 @@
                 <h2>
                     <b>Conference attendance</b>
                 </h2>
-                <hr>
-                {% for conference in conferences %}<h5>{{ conference.name }}</h5>{% endfor %}
+                <div style="margin-left: 20px;">{% include "cv/conference_list.html" %}</div>
             {% endif %}
         {% endblock conferences %}
         <!-- service -->
@@ -132,7 +131,20 @@
                     <b>Service and other activities</b>
                 </h2>
                 <hr>
-                {% for service in services %}<h5>{{ service.role }}</h5>{% endfor %}
+                {% for service in services %}
+                <ul>
+
+                    <div style="margin-left: 20pzx;">
+                            <li>
+                                <span style="float: left">
+                                    <div style="margin-left: 20px;">{{ service.role}}</div>
+                                </span>
+                                <span style="float: right">{{ service.formatted_start_date }} - {{ service.formatted_end_date }}</span>
+                            </div>
+                            <div style="clear: both;"></div>
+
+                    </ul>
+                {% endfor %}
             {% endif %}
         {% endblock service %}
         <!-- End right Column -->

@@ -8,7 +8,12 @@
                 {% if course.create_page %}
                     <a href="{% url 'course_index' course.slug %}">{{ course.identifier }} - {{ course.title }}</a>
                 {% else %}
-                    {{ course.identifier }} - {{ course.title }}
+                    {% if course.url %} 
+                        <a href="{{course.url}}" > {{ course.identifier }} - {{ course.title }}</a>
+                    {% else %}
+                        {{ course.identifier }} - {{ course.title }}
+                    {% endif %}
+                      
                 {% endif %}
             </li>
             <!-- Display each course title and date -->

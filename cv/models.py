@@ -165,8 +165,8 @@ class TalkDetail(models.Model):
     talk = models.ForeignKey(
         Talk, on_delete=models.PROTECT, related_name='details', blank=True)
 
-    location = models.ForeignKey(
-        Location, on_delete=models.PROTECT, related_name="details", blank=True)
+    # location = models.ForeignKey(
+    #     Location, on_delete=models.PROTECT, related_name="details", blank=True)
     date = models.DateField()
     note = models.TextField(max_length=60, blank=True)
     last_updated = models.DateTimeField(auto_now=True)
@@ -175,18 +175,23 @@ class TalkDetail(models.Model):
         return self.date.strftime("%b %Y")
 
     def __str__(self):
-        return f"{self.talk.title}@{self.location.name[:10]}"
+        return f"{self.talk.title}@{self.note[:20]}"
 
 
 class Service(models.Model):
     role = models.CharField(max_length=120)
     location = models.ForeignKey(
         Location, on_delete=models.PROTECT, related_name="service", blank=True)
-    date = models.DateField()
+    date_start = models.DateField(null=True,blank=True)
+    date_end = models.DateField(null=True,blank=True)
+
     last_updated = models.DateTimeField(auto_now=True)
 
     def formatted_end_date(self):
-        return self.date.strftime("%b %Y")
+        return self.date_end.strftime("%b %Y") if self.date_end else "Present"
+
+    def formatted_start_date(self):
+        return self.date_start.strftime("%b %Y")
 
     def __str__(self):
         return self.role
@@ -194,13 +199,14 @@ class Service(models.Model):
 
 class Conference(models.Model):
     name = models.CharField(max_length=60)
-    location = models.ForeignKey(
-        Location, on_delete=models.PROTECT, related_name="conference", blank=True)
+    note = models.TextField(max_length=120,blank=True,null=True)
+    # location = models.ForeignKey(
+    #     Location, on_delete=models.PROTECT, related_name="conference", blank=True)
     date = models.DateField()
     last_updated = models.DateTimeField(auto_now=True)
 
     def formatted_end_date(self):
-        return self.date.strftime("%b %Y")
+        return self.date.strftime("%b %Y") if self.date else "Upcoming"
 
     def __str__(self):
         return self.name

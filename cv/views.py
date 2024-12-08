@@ -2,7 +2,7 @@ from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 from django.db.models import OuterRef, Subquery, Prefetch
 
-from cv.models import Education, Publication, Employment, Talk
+from cv.models import Education, Publication, Employment, Talk, Conference,Service
 from teaching.models import Course
 from home.models import Location, Banner
 from github_io.utils import get_sort, get_last_update
@@ -22,6 +22,9 @@ def cv_index(request):
     employments = get_sort(Employment, 'to_date')
     publications = get_sort(Publication, 'pub_date')
     talks = get_sort(Talk, 'title')
+    services = get_sort(Service, 'date_end')
+
+    conferences = get_sort(Conference, 'date')
 
     latest_experience_date = Employment.objects.filter(
         location=OuterRef('pk')).order_by('-from_date')
@@ -43,6 +46,8 @@ def cv_index(request):
         'talks': talks,
         'course_locations': course_locations,
         'banner': banner,
+        'conferences': conferences,
+        'services':services,
         'last_update': get_last_update()
     }
 

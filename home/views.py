@@ -6,7 +6,19 @@ from github_io.utils import get_sort, get_last_update
 
 
 def home_index(request):
-    banner = get_object_or_404(Banner, page='home')
+    # banner = get_object_or_404(Banner, page='home')
+
+    # banner = Banner.objects.first()  # Use .first() to avoid exceptions
+    
+
+    banner = Banner.objects.filter().first()  # Use .first() to avoid exceptions
+    if not banner:
+        # Default banner data when no banner exists
+        banner = {
+            "banner": None,  # No image available
+            "page": "home",
+            "last_updated": None
+        }
 
     context = {'banner': banner, 'last_update': get_last_update()}
     return render(request, "home/index.html", context)

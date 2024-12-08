@@ -1,0 +1,11 @@
+{% for conference in conferences %}
+    <b>{{ conference.name }}</b>
+    <ul style="list-style-type: disc; padding-left: 20px; margin-top: 0;">
+
+        <li>
+            <span>{{ conference.note }}</span>
+            <span style="float: right">{{ conference.formatted_end_date }}</span>
+        </li>
+    </ul>
+
+{% endfor %}

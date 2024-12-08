@@ -1,8 +1,11 @@
 {% for talk in talks %}
     <b>{{ talk.title }}</b>
-    <ul>
+    <ul style="list-style-type: disc; padding-left: 20px; margin-top: 0;">
         {% for detail in talk.details.all %}
-            <li>{{ detail.location }} - {{ detail.note }}, {{ detail.formatted_end_date }}</li>
+            <li>
+                <span>{{ detail.note }}</span>
+                <span style="float: right">{{ detail.formatted_end_date }}</span>
+            </li>
         {% endfor %}
     </ul>
 {% endfor %}

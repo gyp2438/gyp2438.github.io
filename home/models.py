@@ -76,6 +76,7 @@ class Banner(models.Model):
                             help_text="Enter the template name, e.g., 'home', 'about'")
     last_updated = models.DateTimeField(auto_now=True)
 
+
     def __str__(self):
         return self.page
 

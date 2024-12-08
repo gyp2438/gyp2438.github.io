@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from github_io.utils import markdown_to_html
 
 from home.models import Person, Location, Me
 
@@ -16,6 +17,7 @@ class Reading(models.Model):
 class Course(models.Model):
     # e.g. calculus 2
     title = models.CharField(max_length=120, help_text='e.g. Calculus')
+
     identifier = models.CharField(
         max_length=60, blank=True, help_text='e.g. Math132')
     description = models.TextField(blank=True)
@@ -38,6 +40,19 @@ class Course(models.Model):
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     last_updated = models.DateTimeField(auto_now=True)
 
+    url = models.URLField(blank=True)
+
+
+    def course_id_html(self):
+        # Convert Markdown content to HTML
+        return markdown_to_html(self.identifier)
+    
+
+    def description_as_html(self):
+        # Convert Markdown content to HTML
+        return markdown_to_html(self.description)
+    
+    
     def save(self, *args, **kwargs):
         if not self.slug:  # Only set the slug if it's not already set
             slug = slugify(
