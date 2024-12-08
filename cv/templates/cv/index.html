@@ -95,16 +95,6 @@
                 <div style="margin-left: 20px;">{% include "teaching/list.html" %}</div>
             {% endif %}
         {% endblock teaching %}
-        <!-- mentoring -->
-        {% block mentoring %}
-            {% if mentorings %}
-                <h2>
-                    <b>Mentoring</b>
-                </h2>
-                <hr>
-                {% for mentoring in mentorings %}<b>{{ mentoring.title }}</b>{% endfor %}
-            {% endif %}
-        {% endblock mentoring %}
         <!-- talks -->
         {% block talks %}
             {% if talks %}
@@ -124,6 +114,17 @@
                 <div style="margin-left: 20px;">{% include "cv/conference_list.html" %}</div>
             {% endif %}
         {% endblock conferences %}
+
+        <!-- mentoring -->
+        {% block mentoring %}
+            {% if mentorings %}
+                <h2>
+                    <b>Mentoring</b>
+                </h2>
+                <hr>
+                {% for mentoring in mentorings %}<b>{{ mentoring.title }}</b>{% endfor %}
+            {% endif %}
+        {% endblock mentoring %}
         <!-- service -->
         {% block service %}
             {% if services %}
