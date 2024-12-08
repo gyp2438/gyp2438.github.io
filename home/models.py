@@ -56,6 +56,8 @@ class Me(models.Model):
         upload_to='photos/', blank=True, null=True)
     last_updated = models.DateTimeField(auto_now=True)
 
+
+    
     class Meta:
         verbose_name_plural = "Me"
 

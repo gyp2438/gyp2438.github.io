@@ -70,8 +70,10 @@ class Publication(models.Model):
     # TODO people need to be sorted properly
     people = models.ManyToManyField(
         Person,  related_name="publications", blank=True, through='PublicationPerson')
-    me_instance = Me.objects.first()
-
+    
+    def get_me_instance(self):
+        return Me.objects.first()
+    
     def authors(self):
         author_list = self.people.all()  # Fetch all related authors
         n_auths = author_list.count()
