@@ -1,7 +1,13 @@
+from django.views.generic import DetailView
 from django.shortcuts import render
-from blog.models import Post, Comment
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+
 from blog.forms import CommentForm
+from blog.models import Post, Comment
+from cv.models import Publication
+from home.models import Banner
+from github_io.utils import get_sort, get_last_update
 
 
 # Create your views here.
@@ -15,34 +21,21 @@ def blog_index(request):
     Args:
         request (_type_): _description_
     """
+    banner = Banner.objects.filter(page='blog').first()
+
     # minus sign -> descending -> most recent first
     posts = Post.objects.all().order_by('-created_on')
+    # TODO include all publications
     context = {
         "posts": posts,
+        "title": "research",
+        'banner': banner,
+        'last_update': get_last_update()
     }
     return render(request, "blog/index.html", context)
 
 
-def blog_tag(request, tag):
-    """
-    Allow filter by tag
-
-    Args:
-        request (_type_): _description_
-        tag (_type_): _description_
-    """
-    posts = Post.objects.filter(tags__name__contains=tag)
-    posts = posts.order_by('-created_on')
-
-    context = {
-        "category": tag,
-        "posts": posts,
-    }
-
-    return render(request, "blog/tag.html", context)
-
-
-def blog_detail(request, pk):
+def blog_detail(request, slug):
     """
     Get a specifc blog entry by primary key (pk)
 
@@ -50,7 +43,12 @@ def blog_detail(request, pk):
         request (_type_): _description_
         key (_type_): _description_
     """
-    post = Post.objects.get(pk=pk)
+    # post = Post.objects.get(slug=slug)
+    post = get_object_or_404(Post, slug=slug)
+
+    banner = Banner.objects.filter(page=f'post-{slug}').first()
+    if not banner:
+        banner = Banner.objects.filter(page='blog').first()
 
     form = CommentForm()
     if request.method == "POST":
@@ -69,6 +67,9 @@ def blog_detail(request, pk):
         "post": post,
         "comments": comments,
         "form": form,
+        'banner': banner,
+
+        'last_update': get_last_update()
     }
 
     return render(request, "blog/detail.html", context)

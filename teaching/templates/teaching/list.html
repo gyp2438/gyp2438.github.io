@@ -1,0 +1,19 @@
+{% for location in course_locations %}
+    <b>{{ location.name }}</b>
+    <!-- Display the location title -->
+    <ul>
+        {% for course in location.course.all %}
+            <li>
+                <b>{{ course.season }} {{ course.year }}:</b>
+                {% if course.create_page %}
+                    <a href="{% url 'course_index' course.slug %}">{{ course.identifier }} - {{ course.title }}</a>
+                {% else %}
+                    {{ course.identifier }} - {{ course.title }}
+                {% endif %}
+            </li>
+            <!-- Display each course title and date -->
+        {% empty %}
+            <!-- Handle case with no courses -->
+        {% endfor %}
+    </ul>
+{% endfor %}

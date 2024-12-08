@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block page_title %}
+    {{ course.title|upper }}
+{% endblock page_title %}
+{% block page_content %}
+    <b>Instructor:</b>
+    {{ course.instructor.name }}
+    <br>
+    <div style="margin-left: 20px;">{{ course.instructor.email }}</div>
+    <b>Class Schedule</b>
+    <div style="margin-left: 20px;">{{ course.schedule|linebreaks }}</div>
+    <b>Office Hours</b>
+    <div style="margin-left: 20px;">{{ course.office_hour |linebreaks }}</div>
+    <b>Course Description</b>
+    <div style="margin-left: 20px;">{{ course.description_html |safe }}</div>
+    <b>Reading</b>
+    <div style="margin-left: 20px;">{{ course.reading|linebreaks }}</div>
+    <br>
+    <hr>
+    <b>Homework</b>
+    <div style="margin-left: 20px;">
+        <ul>
+            {% for homework in homeworks %}
+                <li>
+                    <strong>{{ homework.title }}</strong>
+                    <a href="{% url 'download_pdf' homework.id %}">{{ homework.name }}</a> <!-- Link to download the PDF -->
+                    Due {{ homework.due_date }}
+                </li>
+            {% empty %}
+                <li>No homework assignments yet! Check back soon.</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock page_content %}

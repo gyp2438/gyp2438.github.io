@@ -1,61 +1,144 @@
 {% extends "base.html" %}
 {% block page_title %}
-    <h2>CV</h2>
+    CURRICULUM VITAE
 {% endblock page_title %}
 {% block page_content %}
-    <!-- page container  -->
-    <div class="w3-content w3-margin-top" style="max-width:1400px;">
-        <!-- The Grid -->
-        <div class="w3-row-padding">
-            <!-- Left Column 1/3 of page-->
-            <div class="w3-third">
-                <div class="w3-white w3-text-grey w3-card-4">
-                    <div class="w3-display-container">
-                        <img src="https://math.dartmouth.edu/photos/for-people-pages/park_f007f75.jpg"
-                             alt="This is my beautiful wife!"
-                             style="width:100%" />
-                        <div class="w3-display-bottomleft w3-container w3-text-black">
-                            <h2>Ga Yee Park</h2>
-                        </div>
-                    </div>
-                    <div class="w3-container">
-                        <p>
-                            <i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Combinatorialist
-                        </p>
-                        <p>
-                            <i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Hanover, NH
-                        </p>
-                        <p>
-                            <i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>gypark.math@gmail.com
-                        </p>
-                        <br>
+    <!-- The Grid -->
+    <div class="w3-row-padding">
+        <!-- Left Column 1/3 of page-->
+        <div class="w3-col s3">
+            <div class="w3-white w3-text-grey w3-card-4">
+                <div class="w3-display-container">
+                    <img src="{{ me.profile_picture.url }} " alt="" style="width:100%" />
+                    <div class="w3-display-bottomleft w3-container w3-text-black">
+                        <h2 class="outlined-text">{{ me.person.name }}</h2>
                     </div>
                 </div>
+                <div class="w3-container">
+                    <p>
+                        <i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i><b>{{ employments.first.role }}</b> at
+                    </p>
+                    <p>
+                        <i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>{{ employments.first.location }}
+                    </p>
+                    <p>
+                        <i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>{{ me.person.email }}
+                    </p>
+                    <i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="{{ me.github }}" target="_blank">{{ me.github }}</a>
+                </p>
                 <br>
-                <!-- End Left Column -->
             </div>
-            <!-- Right Column  2/3 of page-->
-            <div class="w3-twothird">
-                <!-- Education-->
-                {% block educations %}
-                    <h2>
-                        <b>Education</b>
-                    </h2>
-                    {% for education in educations %}
-                        <h4>
-                            {{ education.title }}
-                            {{ education.location.name }}
-                        </h4>
-                        {{ education.from_date }}
-                        {{ education.to_date }}
-                    {% endfor %}
-                {% endblock educations %}
-                <!-- Experience -->
-                <!-- Some other section -->
-                <!-- End right Column -->
-            </div>
-            <!-- End grid-->
         </div>
-        <!-- End page-->
+        <br>
+        <!-- End Left Column -->
     </div>
+    <!-- Right Column  2/3 of page-->
+    <div class="w3-col s8">
+        <!-- Experience -->
+        {% block employment %}
+            <h2>
+                <b>Employment</b>
+            </h2>
+            <hr>
+            {% for employment in employments %}
+                <div>
+                    <span style="float: left">
+                        <div style="margin-left: 20px;">
+                            <b>{{ employment.role }}</b>
+                            <br>
+                            <div style="margin-left: 20px;">{{ employment.location.name }}</div>
+                        </div>
+                    </span>
+                    <span style="float: right">{{ employment.from_date|date:"M Y" }} - {{ employment.formatted_end_date }}</span>
+                </div>
+                <div style="clear: both;"></div>
+                <div style="margin-left: 40px;">{{ employment.note_as_html|safe }}</div>
+            {% endfor %}
+        {% endblock employment %}
+        <!-- Education-->
+        {% block educations %}
+            <h2>
+                <b>Education</b>
+            </h2>
+            <hr>
+            {% for education in educations %}
+                <div style="margin-left: 20px;">
+                    <span style="float: left">
+                        <b>{{ education.title }}</b>
+                        <br>
+                        <div style="margin-left: 20px;">{{ education.location.name }}</div>
+                    </span>
+                    <span style="float: right">{{ education.from_date|date:"M Y" }} - {{ education.formatted_end_date }}</span>
+                </div>
+                <div style="clear: both;"></div>
+                <!-- Ensures the next elements appear below -->
+            {% endfor %}
+        {% endblock educations %}
+        <!-- publications -->
+        {% block publication %}
+            <h2>
+                <b>Publications</b>
+            </h2>
+            <hr>
+            {% for publication in publications %}
+                <div style="margin-left: 20px;">{{ publication.bib|safe }}</div>
+                <br>
+            {% endfor %}
+        {% endblock publication %}
+        <!-- teaching -->
+        {% block teaching %}
+            {% if course_locations %}
+                <h2>
+                    <b>Teaching</b>
+                </h2>
+                <hr>
+                <div style="margin-left: 20px;">{% include "teaching/list.html" %}</div>
+            {% endif %}
+        {% endblock teaching %}
+        <!-- mentoring -->
+        {% block mentoring %}
+            {% if mentorings %}
+                <h2>
+                    <b>Mentoring</b>
+                </h2>
+                <hr>
+                {% for mentoring in mentorings %}<h5>{{ mentoring.title }}</h5>{% endfor %}
+            {% endif %}
+        {% endblock mentoring %}
+        <!-- talks -->
+        {% block talks %}
+            {% if talks %}
+                <h2>
+                    <b>Talks</b>
+                </h2>
+                <hr>
+                <div style="margin-left: 20px;">{% include "cv/talk_list.html" %}</div>
+            {% endif %}
+        {% endblock talks %}
+        <!-- Conferences -->
+        {% block conferences %}
+            {% if conferences %}
+                <h2>
+                    <b>Conference attendance</b>
+                </h2>
+                <hr>
+                {% for conference in conferences %}<h5>{{ conference.name }}</h5>{% endfor %}
+            {% endif %}
+        {% endblock conferences %}
+        <!-- service -->
+        {% block service %}
+            {% if services %}
+                <h2>
+                    <b>Service and other activities</b>
+                </h2>
+                <hr>
+                {% for service in services %}<h5>{{ service.role }}</h5>{% endfor %}
+            {% endif %}
+        {% endblock service %}
+        <!-- End right Column -->
+    </div>
+    <!-- End grid-->
+    </>
+    <!-- End page-->
+</div>
 {% endblock page_content %}

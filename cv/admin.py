@@ -1,16 +1,8 @@
 from django.contrib import admin
-from cv.models import Person, Location, Education, Employment, Publication, \
-    Preprint, Teaching, Mentoring, Talk, Service, Conference
+from cv.models import Education, Employment, Publication, \
+    Mentoring, Talk, TalkDetail, Service, Conference, PublicationPerson
 
 # Register your models here.
-
-
-class PersonAdmin(admin.ModelAdmin):
-    pass
-
-
-class LocationAdmin(admin.ModelAdmin):
-    pass
 
 
 class EducationAdmin(admin.ModelAdmin):
@@ -21,16 +13,15 @@ class EmploymentAdmin(admin.ModelAdmin):
     pass
 
 
+class PublicationPersonInline(admin.TabularInline):
+    model = PublicationPerson
+    extra = 1  # Number of empty forms to display
+    fields = ('person', 'order')  # Fields to display in the inline
+    ordering = ['order']  # Ensure inline is ordered by the 'order' field
+
+
 class PublicationAdmin(admin.ModelAdmin):
-    pass
-
-
-class PreprintAdmin(admin.ModelAdmin):
-    pass
-
-
-class TeachingAdmin(admin.ModelAdmin):
-    pass
+    inlines = [PublicationPersonInline]
 
 
 class MentoringAdmin(admin.ModelAdmin):
@@ -38,6 +29,10 @@ class MentoringAdmin(admin.ModelAdmin):
 
 
 class TalkAdmin(admin.ModelAdmin):
+    pass
+
+
+class TalkDetailAdmin(admin.ModelAdmin):
     pass
 
 
@@ -49,14 +44,11 @@ class ConferenceAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(Person, PersonAdmin)
-admin.site.register(Location, LocationAdmin)
 admin.site.register(Education, EducationAdmin)
 admin.site.register(Employment, EmploymentAdmin)
 admin.site.register(Publication, PublicationAdmin)
-admin.site.register(Preprint, PreprintAdmin)
-admin.site.register(Teaching, TeachingAdmin)
 admin.site.register(Mentoring, MentoringAdmin)
 admin.site.register(Talk, TalkAdmin)
+admin.site.register(TalkDetail, TalkDetailAdmin)
 admin.site.register(Conference, ConferenceAdmin)
 admin.site.register(Service, ServiceAdmin)

@@ -5,6 +5,8 @@ from . import views
 
 urlpatterns = [
     path("", views.home_index, name="home_index"),
+    path("tag/<slug:slug>/", views.tag_index, name="tag_index"),
+
 ]
 
 urlpatterns += [

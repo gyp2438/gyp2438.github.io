@@ -5,145 +5,332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
+    <!-- Links (sit on top) -->
+    <div class="w3-top">
+        <div class="w3-row w3-padding w3-black">
+            <div class="w3-col s2">
+                <a href="/" class="w3-button w3-block w3-black">HOME</a>
+            </div>
+            
+
+            <div class="w3-col s2">
+                <a href="/blog/" class="w3-button w3-block w3-black">RESEARCH</a>
+            </div>
+            
+            <div class="w3-col s2">
+                <a href="/teaching/" class="w3-button w3-block w3-black">TEACHING</a>
+            </div>
+            
+            <div class="w3-col s2">
+                <a href="/cv/" class="w3-button w3-block w3-black">CV</a>
+            </div>
+
+            
+
+            <div class="w3-col s2">
+                <a href="/" class="w3-button w3-block w3-black">MISC</a>
+            </div>
+        
+        </div>
+    </div>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>My Personal Blog</title>
+
+    <title>John Lee</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
     <style>
     body, html {
       height: 100%;
       font-family: "Inconsolata", sans-serif;
+      font-size: 20px; 
     }
-    
+    .outlined-text {
+        color: white; /* Text color */
+        text-shadow: 
+            -1px -1px 0 #000,  
+             1px -1px 0 #000,
+            -1px  1px 0 #000,
+             1px  1px 0 #000; /* Black border */
+    }
     .bgimg {
       background-position: center;
       background-size: cover;
-      background-image: url("https://lh4.googleusercontent.com/VnZGzEfX_rT4QYh7tFpIZX1BePMyeA0VOQhjVq6mEKibFdqm_NNzya_xHlVqPLNv4z2ft95sIAZPJSnaM5ezKEqtg7djM4ppzlTmYbg2Gtt9kHFSuuX6GqQtGWbx2Toe4g=w1280");
-      min-height: 25%;
-    }
-    
+      max-width: 90% ;
+      margin: 0 auto; /* Center the div horizontally */
 
+      height: 500px; /* Define a maximum height */
+      overflow: hidden; /* Hide the overflow to crop the image */
+
+    }
     </style>
+
+    
 </head>
 <body>
-    
-<!-- Links (sit on top) -->
-<div class="w3-top">
-    <div class="w3-row w3-padding w3-black">
-        <div class="w3-col s2">
-            <a href="/" class="w3-button w3-block w3-black">HOME</a>
-        </div>
-        
 
-        <div class="w3-col s2">
-            <a href="/" class="w3-button w3-block w3-black">Research</a>
-        </div>
-        
-        <div class="w3-col s2">
-            <a href="/" class="w3-button w3-block w3-black">Teaching</a>
-        </div>
-        
-        <div class="w3-col s2">
-            <a href="/cv/" class="w3-button w3-block w3-black">CV</a>
-        </div>
 
-        <div class="w3-col s2">
-            <a href="/blog/" class="w3-button w3-block w3-black">BLOG</a>
-        </div>
+    <!-- Header with image -->
+        <div class="bgimg w3-display-container " id="home" style="background-image: url('')" >
 
-        <div class="w3-col s2">
-            <a href="/" class="w3-button w3-block w3-black">MISC</a>
-        </div>
-    
     </div>
-</div>
-
-<!-- Header with image -->
-<header class="bgimg w3-display-container w3-grayscale-min" id="home">
-    <div class="w3-display-middle w3-center">
-        
-    </div>
-
-</header>
-
 <!-- When extending, other page templates can go here when placed in the title/content sections. -->
+
+<h2 class="w3-center w3-padding-64">
+    <span class="w3-tag w3-wide">
+        
+    CURRICULUM VITAE
+
+    </span>
+</h2>
 <hr>
 
-    <h2>CV</h2>
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
 
-
-    <!-- page container  -->
-    <div class="w3-content w3-margin-top" style="max-width:1400px;">
-        <!-- The Grid -->
-        <div class="w3-row-padding">
-            <!-- Left Column 1/3 of page-->
-            <div class="w3-third">
-                <div class="w3-white w3-text-grey w3-card-4">
-                    <div class="w3-display-container">
-                        <img src="https://math.dartmouth.edu/photos/for-people-pages/park_f007f75.jpg"
-                             alt="This is my beautiful wife!"
-                             style="width:100%" />
-                        <div class="w3-display-bottomleft w3-container w3-text-black">
-                            <h2>Ga Yee Park</h2>
-                        </div>
-                    </div>
-                    <div class="w3-container">
-                        <p>
-                            <i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Combinatorialist
-                        </p>
-                        <p>
-                            <i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Hanover, NH
-                        </p>
-                        <p>
-                            <i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>gypark.math@gmail.com
-                        </p>
-                        <br>
+    <!-- The Grid -->
+    <div class="w3-row-padding">
+        <!-- Left Column 1/3 of page-->
+        <div class="w3-col s3">
+            <div class="w3-white w3-text-grey w3-card-4">
+                <div class="w3-display-container">
+                    <img src="/media/photos/park_f007f75.jpg " alt="" style="width:100%" />
+                    <div class="w3-display-bottomleft w3-container w3-text-black">
+                        <h2 class="outlined-text">John Lee</h2>
                     </div>
                 </div>
+                <div class="w3-container">
+                    <p>
+                        <i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i><b>Data Scientist</b> at
+                    </p>
+                    <p>
+                        <i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Miltenyi Biotec
+                    </p>
+                    <p>
+                        <i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>john.lee.44327@gmail.com
+                    </p>
+                    <i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i><a href="http://github.com/johnlee4" target="_blank">http://github.com/johnlee4</a>
+                </p>
                 <br>
-                <!-- End Left Column -->
             </div>
-            <!-- Right Column  2/3 of page-->
-            <div class="w3-twothird">
-                <!-- Education-->
-                
-                    <h2>
-                        <b>Education</b>
-                    </h2>
-                    
-                        <h4>
-                            Ph.D
-                            University of Massachusetts
-                        </h4>
-                        Sept. 1, 2016
-                        May 1, 2022
-                    
-                        <h4>
-                            Post-baccaularate
-                            Smith College
-                        </h4>
-                        Sept. 1, 2015
-                        May 1, 2016
-                    
-                
-                <!-- Experience -->
-                <!-- Some other section -->
-                <!-- End right Column -->
-            </div>
-            <!-- End grid-->
         </div>
-        <!-- End page-->
+        <br>
+        <!-- End Left Column -->
     </div>
+    <!-- Right Column  2/3 of page-->
+    <div class="w3-col s8">
+        <!-- Experience -->
+        
+            <h2>
+                <b>Employment</b>
+            </h2>
+            <hr>
+            
+                <div>
+                    <span style="float: left">
+                        <div style="margin-left: 20px;">
+                            <b>Data Scientist</b>
+                            <br>
+                            <div style="margin-left: 20px;">Miltenyi Biotec</div>
+                        </div>
+                    </span>
+                    <span style="float: right">Mar 2022 - Present</span>
+                </div>
+                <div style="clear: both;"></div>
+                <div style="margin-left: 40px;"><p>What I did here</p>
+<ul>
+<li>something</li>
+</ul></div>
+            
+                <div>
+                    <span style="float: left">
+                        <div style="margin-left: 20px;">
+                            <b>Computational Developer</b>
+                            <br>
+                            <div style="margin-left: 20px;">Cold Spring Harbor Laboratory</div>
+                        </div>
+                    </span>
+                    <span style="float: right">Oct 2019 - Mar 2022</span>
+                </div>
+                <div style="clear: both;"></div>
+                <div style="margin-left: 40px;"><p>Something else I did here</p>
+<ul>
+<li>This thing</li>
+</ul></div>
+            
+                <div>
+                    <span style="float: left">
+                        <div style="margin-left: 20px;">
+                            <b>Graduate Student Lecturer and Teaching Assistant</b>
+                            <br>
+                            <div style="margin-left: 20px;">University of Massachusetts, Amherst</div>
+                        </div>
+                    </span>
+                    <span style="float: right">Sep 2015 - May 2019</span>
+                </div>
+                <div style="clear: both;"></div>
+                <div style="margin-left: 40px;"></div>
+            
+        
+        <!-- Education-->
+        
+            <h2>
+                <b>Education</b>
+            </h2>
+            <hr>
+            
+                <div style="margin-left: 20px;">
+                    <span style="float: left">
+                        <b>MS Applied Math</b>
+                        <br>
+                        <div style="margin-left: 20px;">University of Massachusetts, Amherst</div>
+                    </span>
+                    <span style="float: right">Sep 2015 - May 2019</span>
+                </div>
+                <div style="clear: both;"></div>
+                <!-- Ensures the next elements appear below -->
+            
+                <div style="margin-left: 20px;">
+                    <span style="float: left">
+                        <b>BS Applied Math</b>
+                        <br>
+                        <div style="margin-left: 20px;">University of Massachusetts, Amherst</div>
+                    </span>
+                    <span style="float: right">Sep 2011 - May 2015</span>
+                </div>
+                <div style="clear: both;"></div>
+                <!-- Ensures the next elements appear below -->
+            
+                <div style="margin-left: 20px;">
+                    <span style="float: left">
+                        <b>BS Biology</b>
+                        <br>
+                        <div style="margin-left: 20px;">University of Massachusetts, Amherst</div>
+                    </span>
+                    <span style="float: right">Sep 2011 - May 2015</span>
+                </div>
+                <div style="clear: both;"></div>
+                <!-- Ensures the next elements appear below -->
+            
+        
+        <!-- publications -->
+        
+            <h2>
+                <b>Publications</b>
+            </h2>
+            <hr>
+            
+                <div style="margin-left: 20px;"><b>Multiomic characterization of colorectal cancer using MICS technology reveals interaction of antigen presenting cancer associated fibroblasts and T cells</b>. Emily Neil and et. al., 2024, <i>AACR  (poster)</i>, 8, Issue 6 Supp. <a href="https://doi.org/10.1158/1538-7445.AM2024-5565" target="_blank">https://doi.org/10.1158/1538-7445.AM2024-5565</a>.</div>
+                <br>
+            
+                <div style="margin-left: 20px;"><b>Same-section spatial multiomic analyses using MICS technology for investigating the dynamics of the tumor microenvironment</b>. Dongju Park and et. al., 2024, <i>AACR (Poster)</i>, 84, Issue 6 supp. <a href="https://doi.org/10.1158/1538-7445.AM2024-4308" target="_blank">https://doi.org/10.1158/1538-7445.AM2024-4308</a>.</div>
+                <br>
+            
+                <div style="margin-left: 20px;"><b>Coexpression reveals conserved gene programs that co-vary with cell type across kingdoms</b>. Megan Crow, Hamsini Suresh, <u>John Lee</u> and Jesse Gillis, 2022, <i>Nucleic Acids Research</i>, 50, Issue 8. <a href="https://doi.org/10.1093/nar/gkac276" target="_blank">https://doi.org/10.1093/nar/gkac276</a>.</div>
+                <br>
+            
+                <div style="margin-left: 20px;"><b>A Meta-Analytic Single-Cell Atlas of Mouse Bone Marrow Hematopoietic Development</b>. Benjamin Harris, <u>John Lee</u> and Jesse Gillis, 2021, <i>bioRxiv</i>. <a href="https://doi.org/10.1101/2021.08.12.456098" target="_blank">https://doi.org/10.1101/2021.08.12.456098</a>.</div>
+                <br>
+            
+                <div style="margin-left: 20px;"><b>CoCoCoNet: conserved and comparative co-expression across a diverse set of species</b>. <u>John Lee</u>, Manthan Shah, Sara Ballouz, Megan Crow and Jesse Gillis, 2020, <i>Nucleic Acids Research</i>, 48, Issue W1. <a href="https://doi.org/10.1093/nar/gkaa348" target="_blank">https://doi.org/10.1093/nar/gkaa348</a>.</div>
+                <br>
+            
+                <div style="margin-left: 20px;"><b>Phononic rogue waves</b>. Efstathios Charalampidis, <u>John Lee</u>, Chris Chong and Panayotis Kevrekidis, 2018, <i>Physical Review E</i>, 98, Issue 3. <a href="https://doi.org/10.1103/PhysRevE.98.032903" target="_blank">https://doi.org/10.1103/PhysRevE.98.032903</a>.</div>
+                <br>
+            
+                <div style="margin-left: 20px;"><b>Discrete breathers in a mass-in-mass chain with Hertzian local resonators</b>. Sam Wallen, <u>John Lee</u>, Dominic Mei, Chris Chong, Panayotis Kevrekidis and Nicholas Boechler, 2017, <i>Physical Review E</i>, 95, Issue 2. <a href="https://doi.org/10.1103/PhysRevE.95.022904" target="_blank">https://doi.org/10.1103/PhysRevE.95.022904</a>.</div>
+                <br>
+            
+        
+        <!-- teaching -->
+        
+            
+                <h2>
+                    <b>Teaching</b>
+                </h2>
+                <hr>
+                <div style="margin-left: 20px;">
+    <b>University of Massachusetts, Amherst</b>
+    <!-- Display the location title -->
+    <ul>
+        
+            <li>
+                <b>Spring 2019:</b>
+                
+                    Math331 - Ordinary Differential Equations
+                
+            </li>
+            <!-- Display each course title and date -->
+        
+            <li>
+                <b>Fall 2018:</b>
+                
+                    Math331 - Ordinary Differential Equations
+                
+            </li>
+            <!-- Display each course title and date -->
+        
+            <li>
+                <b>Fall 2017:</b>
+                
+                    Math132 - Calculus II
+                
+            </li>
+            <!-- Display each course title and date -->
+        
+            <li>
+                <b>Summer 2017:</b>
+                
+                    Math132 - Calculus II
+                
+            </li>
+            <!-- Display each course title and date -->
+        
+            <li>
+                <b>Spring 2017:</b>
+                
+                    Math132 - Calculus II
+                
+            </li>
+            <!-- Display each course title and date -->
+        
+    </ul>
 
+</div>
+            
+        
+        <!-- mentoring -->
+        
+            
+        
+        <!-- talks -->
+        
+            
+        
+        <!-- Conferences -->
+        
+            
+        
+        <!-- service -->
+        
+            
+        
+        <!-- End right Column -->
+    </div>
+    <!-- End grid-->
+    </>
+    <!-- End page-->
+</div>
+
+</div>
 </body>
 
 
 <!-- Footer -->
 <!-- TODO make this more fun? -->
 <footer class="w3-center w3-light-grey w3-padding-48 w3-large">
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+    Last updated: Oct. 31, 2024, 3:01 p.m.
 </footer>
 
     

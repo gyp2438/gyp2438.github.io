@@ -1,0 +1,8 @@
+{% for talk in talks %}
+    <b>{{ talk.title }}</b>
+    <ul>
+        {% for detail in talk.details.all %}
+            <li>{{ detail.location }} - {{ detail.note }}, {{ detail.formatted_end_date }}</li>
+        {% endfor %}
+    </ul>
+{% endfor %}
